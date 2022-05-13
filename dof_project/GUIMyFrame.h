@@ -28,6 +28,7 @@ protected:
 
 public:
 	GUIMyFrame(wxWindow* parent);
-	wxImage image;
+	wxImage image; 
+
 };
 #endif // __GUI_MY_FRAME_H__
