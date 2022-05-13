@@ -10,7 +10,7 @@
 *.userosscache
 *.sln.docstates
 *.sln
-dof_project.vcxproj
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -362,7 +362,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-dof_project/dof_project.vcxproj
-*.vcxproj
-dof_project/dof_project.vcxproj
-*.vcxproj
+
