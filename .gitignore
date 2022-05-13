@@ -364,3 +364,4 @@ MigrationBackup/
 FodyWeavers.xsd
 dof_project/dof_project.vcxproj
 *.vcxproj
+dof_project/dof_project.vcxproj
