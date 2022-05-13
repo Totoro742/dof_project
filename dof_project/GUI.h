@@ -42,6 +42,7 @@ class MyFrame : public wxFrame
 		wxPanel* m_panel1;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void m_scrolledWindow( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void click( wxCommandEvent& event ) { event.Skip(); }
 		
 	

@@ -29,6 +29,7 @@ protected:
 public:
 	GUIMyFrame(wxWindow* parent);
 	wxImage image; 
+	wxBitmap bitmap, buffer;
 	void click(wxCommandEvent& event);
 
 };

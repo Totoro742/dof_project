@@ -59,12 +59,14 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	this->Centre( wxBOTH );
 	
 	// Connect Events
+	this->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_scrolledWindow ) );
 	m_button1->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::click ), NULL, this );
 }
 
 MyFrame::~MyFrame()
 {
 	// Disconnect Events
+	this->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_scrolledWindow ) );
 	m_button1->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::click ), NULL, this );
 	
 }
