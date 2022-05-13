@@ -30,6 +30,10 @@ public:
 	GUIMyFrame(wxWindow* parent);
 	wxImage image; 
 	void click(wxCommandEvent& event);
+	wxImage Img_Org, // tu bedzie przechowywany oryginalny obrazek
+		Img_Cpy;        // wszystkie zmiany beda wykonywane na tej kopii obrazka
+
+	void Repaint();
 
 };
 #endif // __GUI_MY_FRAME_H__
