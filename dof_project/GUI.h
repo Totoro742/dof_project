@@ -17,6 +17,7 @@
 #include <wx/colour.h>
 #include <wx/settings.h>
 #include <wx/slider.h>
+#include <wx/stattext.h>
 #include <wx/sizer.h>
 #include <wx/panel.h>
 #include <wx/frame.h>
@@ -33,9 +34,16 @@ class MyFrame : public wxFrame
 	
 	protected:
 		wxButton* m_button1;
+		wxButton* m_button2;
 		wxSlider* m_slider1;
+		wxStaticText* m_staticText1;
 		wxSlider* m_slider2;
+		wxStaticText* m_staticText2;
 		wxPanel* m_panel1;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void click( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		
