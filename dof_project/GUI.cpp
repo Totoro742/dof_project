@@ -44,7 +44,6 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	bSizer2->Add( m_staticText2, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxBOTTOM, 5 );
 	
 	m_checkBox1 = new wxCheckBox( this, wxID_ANY, wxT("Preview"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_checkBox1->SetValue(true); 
 	bSizer2->Add( m_checkBox1, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 	
 	
