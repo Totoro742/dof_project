@@ -50,6 +50,7 @@ class MyFrame : public wxFrame
 		virtual void load_picture( wxCommandEvent& event ) { event.Skip(); }
 		virtual void load_map( wxCommandEvent& event ) { event.Skip(); }
 		virtual void save_image( wxCommandEvent& event ) { event.Skip(); }
+		virtual void m_s_blur( wxScrollEvent& event ) { event.Skip(); }
 		virtual void preview_mode( wxCommandEvent& event ) { event.Skip(); }
 		
 	
