@@ -20,11 +20,11 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	bSizer2 = new wxBoxSizer( wxVERTICAL );
 	
 	bSizer2->SetMinSize( wxSize( 200,-1 ) ); 
-	m_button1 = new wxButton( this, wxID_ANY, wxT("Load Bitmap"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer2->Add( m_button1, 0, wxALIGN_CENTER|wxALIGN_CENTER_HORIZONTAL|wxALL|wxEXPAND|wxSHAPED, 5 );
+	picture_button = new wxButton( this, wxID_ANY, wxT("Load Picture"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer2->Add( picture_button, 0, wxALIGN_CENTER|wxALIGN_CENTER_HORIZONTAL|wxALL|wxEXPAND|wxSHAPED, 5 );
 	
-	m_button2 = new wxButton( this, wxID_ANY, wxT("Load Map"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer2->Add( m_button2, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxEXPAND|wxSHAPED, 5 );
+	map_button = new wxButton( this, wxID_ANY, wxT("Load Map"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer2->Add( map_button, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxEXPAND|wxSHAPED, 5 );
 	
 	m_slider1 = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	bSizer2->Add( m_slider1, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxEXPAND|wxSHAPED, 5 );
@@ -59,14 +59,20 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	this->Centre( wxBOTH );
 	
 	// Connect Events
+	this->Connect( wxEVT_PAINT, wxPaintEventHandler( MyFrame::MyFrameOnPaint ) );
+	this->Connect( wxEVT_SIZE, wxSizeEventHandler( MyFrame::MyFrameOnSize ) );
 	this->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_scrolledWindow ) );
-	m_button1->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::click ), NULL, this );
+	picture_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_picture ), NULL, this );
+	map_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_map ), NULL, this );
 }
 
 MyFrame::~MyFrame()
 {
 	// Disconnect Events
+	this->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MyFrame::MyFrameOnPaint ) );
+	this->Disconnect( wxEVT_SIZE, wxSizeEventHandler( MyFrame::MyFrameOnSize ) );
 	this->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_scrolledWindow ) );
-	m_button1->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::click ), NULL, this );
+	picture_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_picture ), NULL, this );
+	map_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_map ), NULL, this );
 	
 }

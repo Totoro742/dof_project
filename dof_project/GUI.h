@@ -33,8 +33,8 @@ class MyFrame : public wxFrame
 	private:
 	
 	protected:
-		wxButton* m_button1;
-		wxButton* m_button2;
+		wxButton* picture_button;
+		wxButton* map_button;
 		wxSlider* m_slider1;
 		wxStaticText* m_staticText1;
 		wxSlider* m_slider2;
@@ -42,8 +42,11 @@ class MyFrame : public wxFrame
 		wxPanel* m_panel1;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void MyFrameOnPaint( wxPaintEvent& event ) { event.Skip(); }
+		virtual void MyFrameOnSize( wxSizeEvent& event ) { event.Skip(); }
 		virtual void m_scrolledWindow( wxUpdateUIEvent& event ) { event.Skip(); }
-		virtual void click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void load_picture( wxCommandEvent& event ) { event.Skip(); }
+		virtual void load_map( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
