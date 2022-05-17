@@ -28,12 +28,16 @@ protected:
 
 public:
 	GUIMyFrame(wxWindow* parent);
-	wxImage image; 
-	void click(wxCommandEvent& event);
-	wxImage Img_Org, // tu bedzie przechowywany oryginalny obrazek
-		Img_Cpy;        // wszystkie zmiany beda wykonywane na tej kopii obrazka
+	wxImage image, map, edited_image;
+	wxBitmap bitmap, buffer;
+	void load_picture(wxCommandEvent& event);
+	void load_map(wxCommandEvent& event);
+	void repaint();
+	void MyFrameOnPaint(wxPaintEvent& event);
+	void m_scrolledWindow(wxUpdateUIEvent& event);
+	void save_image(wxCommandEvent& event);
+	void preview_mode(wxCommandEvent& event);
 
-	void Repaint();
 
 };
 #endif // __GUI_MY_FRAME_H__
