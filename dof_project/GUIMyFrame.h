@@ -40,7 +40,7 @@ public:
 	void save_image(wxCommandEvent& event);
 	void preview_mode(wxCommandEvent& event);
 	void m_s_blur(wxScrollEvent& event);
-	void preview_mode(wxCommandEvent& event);
+	//void preview_mode(wxCommandEvent& event);
 
 	void Blur_IMG();
 	void Blur_Frames();

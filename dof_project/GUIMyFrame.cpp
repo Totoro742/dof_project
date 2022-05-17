@@ -12,6 +12,7 @@ void GUIMyFrame::load_picture(wxCommandEvent& event) {
 		wxString path = loadFile.GetPath();
 		image.AddHandler(new wxJPEGHandler);
 		image.LoadFile(path, wxBITMAP_TYPE_JPEG);
+		//Blur_Frames();
 	}
 }
 
@@ -22,6 +23,7 @@ void GUIMyFrame::load_map(wxCommandEvent& event) {
 		map.AddHandler(new wxJPEGHandler);
 		map.LoadFile(path, wxBITMAP_TYPE_JPEG);
 	}
+	
 }
 
 void GUIMyFrame::save_image(wxCommandEvent& event) {
@@ -85,6 +87,11 @@ void GUIMyFrame::Blur_Frames() {
 	for (int i = 0; i < 10; i++) {
 		blurs_map.push_back(edited_image.Copy().Blur(i));
 	}
+}
+
+void GUIMyFrame::m_s_blur(wxScrollEvent& event) {
+	Blur_IMG();
+	repaint();
 }
 
 

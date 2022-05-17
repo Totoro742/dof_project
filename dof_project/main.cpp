@@ -15,6 +15,7 @@ IMPLEMENT_APP(MyApp);
 bool MyApp::OnInit()
 {
 	GUIMyFrame* mainFrame = new GUIMyFrame(NULL);
+	
 	mainFrame->Show(true);
 	SetTopWindow(mainFrame);
 
