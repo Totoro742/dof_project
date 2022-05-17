@@ -7,9 +7,9 @@ GUIMyFrame::GUIMyFrame(wxWindow* parent) : MyFrame(parent) {
 }
 
 void GUIMyFrame::load_picture(wxCommandEvent& event) {
-	wxFileDialog saveFileDialog(this, "Choose an image", "", "", "JPG files (*.jpg)|*.jpg", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
-	if (saveFileDialog.ShowModal() == wxID_OK) {
-		wxString path = saveFileDialog.GetPath();
+	wxFileDialog loadFile(this, "Choose an image", "", "", "JPG files (*.jpg)|*.jpg", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+	if (loadFile.ShowModal() == wxID_OK) {
+		wxString path = loadFile.GetPath();
 		image.AddHandler(new wxJPEGHandler);
 		image.LoadFile(path, wxBITMAP_TYPE_JPEG);
 	}
@@ -21,6 +21,14 @@ void GUIMyFrame::load_map(wxCommandEvent& event) {
 		wxString path = saveFileDialog.GetPath();
 		map.AddHandler(new wxJPEGHandler);
 		map.LoadFile(path, wxBITMAP_TYPE_JPEG);
+	}
+}
+
+void GUIMyFrame::save_image(wxCommandEvent& event) {
+	wxFileDialog saveFileDialog(this, "Save file", "", "", "JPG files (*.jpg)|*.jpg", wxFD_SAVE);
+	if (saveFileDialog.ShowModal() == wxID_OK && edited_image.IsOk()) {
+		wxString path = saveFileDialog.GetPath();
+		edited_image.SaveFile(path, saveFileDialog.GetFilename());
 	}
 }
 
@@ -39,6 +47,13 @@ void GUIMyFrame::repaint() {
 		imageDC->DrawBitmap(wxBitmap(tmp), wxPoint(0, 0));
 	}
 }
+
+void GUIMyFrame::preview_mode(wxCommandEvent& event) {
+
+}
+
+
+
 
 void GUIMyFrame::MyFrameOnPaint(wxPaintEvent& event) {
 	repaint();

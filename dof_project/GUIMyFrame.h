@@ -28,13 +28,16 @@ protected:
 
 public:
 	GUIMyFrame(wxWindow* parent);
-	wxImage image, map;
+	wxImage image, map, edited_image;
 	wxBitmap bitmap, buffer;
 	void load_picture(wxCommandEvent& event);
 	void load_map(wxCommandEvent& event);
 	void repaint();
 	void MyFrameOnPaint(wxPaintEvent& event);
 	void m_scrolledWindow(wxUpdateUIEvent& event);
+	void save_image(wxCommandEvent& event);
+	void preview_mode(wxCommandEvent& event);
+
 
 };
 #endif // __GUI_MY_FRAME_H__

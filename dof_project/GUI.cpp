@@ -26,6 +26,9 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	map_button = new wxButton( this, wxID_ANY, wxT("Load Map"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer2->Add( map_button, 0, wxALL|wxEXPAND|wxSHAPED, 5 );
 	
+	m_button3 = new wxButton( this, wxID_ANY, wxT("Save Picture"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer2->Add( m_button3, 0, wxALL|wxEXPAND|wxSHAPED, 5 );
+	
 	m_slider1 = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	bSizer2->Add( m_slider1, 0, wxALL|wxEXPAND, 5 );
 	
@@ -39,6 +42,10 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	m_staticText2 = new wxStaticText( this, wxID_ANY, wxT("Blur"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText2->Wrap( -1 );
 	bSizer2->Add( m_staticText2, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxBOTTOM, 5 );
+	
+	m_checkBox1 = new wxCheckBox( this, wxID_ANY, wxT("Preview"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_checkBox1->SetValue(true); 
+	bSizer2->Add( m_checkBox1, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 	
 	
 	bSizer1->Add( bSizer2, 0, wxEXPAND, 5 );
@@ -64,6 +71,8 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	this->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_scrolledWindow ) );
 	picture_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_picture ), NULL, this );
 	map_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_map ), NULL, this );
+	m_button3->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::save_image ), NULL, this );
+	m_checkBox1->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( MyFrame::preview_mode ), NULL, this );
 }
 
 MyFrame::~MyFrame()
@@ -73,5 +82,7 @@ MyFrame::~MyFrame()
 	this->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_scrolledWindow ) );
 	picture_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_picture ), NULL, this );
 	map_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_map ), NULL, this );
+	m_button3->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::save_image ), NULL, this );
+	m_checkBox1->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( MyFrame::preview_mode ), NULL, this );
 	
 }
