@@ -43,7 +43,6 @@ class MyFrame : public wxFrame
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void MyFrameOnPaint( wxPaintEvent& event ) { event.Skip(); }
-		virtual void MyFrameOnSize( wxSizeEvent& event ) { event.Skip(); }
 		virtual void m_scrolledWindow( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void load_picture( wxCommandEvent& event ) { event.Skip(); }
 		virtual void load_map( wxCommandEvent& event ) { event.Skip(); }
@@ -51,7 +50,7 @@ class MyFrame : public wxFrame
 	
 	public:
 		
-		MyFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1000,700 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MyFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~MyFrame();
 	
