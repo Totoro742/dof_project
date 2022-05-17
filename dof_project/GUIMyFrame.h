@@ -21,9 +21,11 @@
 #include <wx/colordlg.h>
 #include <wx/dcbuffer.h>
 #include <wx/filefn.h> 
+#include <vector>
 
 class GUIMyFrame : public MyFrame {
 protected:
+	std::vector<wxImage> blurs_map;
 
 
 public:
@@ -37,6 +39,11 @@ public:
 	void m_scrolledWindow(wxUpdateUIEvent& event);
 	void save_image(wxCommandEvent& event);
 	void preview_mode(wxCommandEvent& event);
+
+	void Blur_IMG();
+	void Blur_Frames();
+
+
 
 
 };

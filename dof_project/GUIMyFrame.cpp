@@ -52,6 +52,40 @@ void GUIMyFrame::preview_mode(wxCommandEvent& event) {
 
 }
 
+void GUIMyFrame::Blur_IMG() {
+	edited_image = image.Copy();
+
+	unsigned char *cpy_ptr = edited_image.GetData();
+	unsigned char *map_ptr = map.GetData();
+
+	int h = edited_image.GetSize().GetHeight();
+	int w = edited_image.GetSize().GetWidth();
+
+	float x = m_slider1->GetValue() / 100.f;
+	float y = 1.f - m_slider2->GetValue() / 100.f;
+
+	for (int j = 0; j < h; j++)
+	{
+		for (int i = 0; i < w; i++) {
+			for (int k = 0; k < 3; k++) {
+
+				int c = x * 255;
+				int d = abs(c - map_ptr[j*w * 3 + i * 3 + k]);
+				int f = (blurs_map.size() - y * (blurs_map.size() - 1)) - 1;
+				if (f < 0) f = 0;
+				int s = d / 255.f * f;
+				cpy_ptr[j*w * 3 + i * 3 + k] = blurs_map[s].GetData()[j*w * 3 + i * 3 + k];
+			}
+		}
+	}
+
+}
+
+void GUIMyFrame::Blur_Frames() {
+	for (int i = 0; i < 10; i++) {
+		blurs_map.push_back(edited_image.Copy().Blur(i));
+	}
+}
 
 
 
