@@ -3,7 +3,9 @@
 GUIMyFrame::GUIMyFrame(wxWindow* parent) : MyFrame(parent) {
 	this->SetBackgroundColour(wxColor(128, 128, 128));
 	image.Create(m_panel1->GetSize());
+	edited_image.Create(m_panel1->GetSize());
 	image.SetRGB(wxRect(m_panel1->GetSize()), 255, 255, 255);
+	edited_image.SetRGB(wxRect(m_panel1->GetSize()), 255, 255, 255);
 }
 
 void GUIMyFrame::load_picture(wxCommandEvent& event) {
@@ -12,7 +14,8 @@ void GUIMyFrame::load_picture(wxCommandEvent& event) {
 		wxString path = loadFile.GetPath();
 		image.AddHandler(new wxJPEGHandler);
 		image.LoadFile(path, wxBITMAP_TYPE_JPEG);
-		//Blur_Frames();
+		edited_image = image.Copy();
+		Blur_Frames();
 	}
 }
 
@@ -22,6 +25,7 @@ void GUIMyFrame::load_map(wxCommandEvent& event) {
 		wxString path = saveFileDialog.GetPath();
 		map.AddHandler(new wxJPEGHandler);
 		map.LoadFile(path, wxBITMAP_TYPE_JPEG);
+		map = map.Blur(5);
 	}
 	
 }
@@ -42,7 +46,7 @@ void GUIMyFrame::repaint() {
 	imageDC->SetBackground(*wxBLACK_BRUSH);
 	imageDC->Clear();
 
-	wxImage tmp = image.Copy();
+	wxImage tmp = edited_image;
 	if (tmp.Ok()) {
 		tmp.Rescale(m_panel1->GetSize().GetWidth(), m_panel1->GetSize().GetHeight());
 
@@ -60,23 +64,22 @@ void GUIMyFrame::Blur_IMG() {
 	unsigned char *cpy_ptr = edited_image.GetData();
 	unsigned char *map_ptr = map.GetData();
 
-	int h = edited_image.GetSize().GetHeight();
-	int w = edited_image.GetSize().GetWidth();
+	int hight = edited_image.GetSize().GetHeight();
+	int width = edited_image.GetSize().GetWidth();
 
-	float x = m_slider1->GetValue() / 100.f;
-	float y = 1.f - m_slider2->GetValue() / 100.f;
+	int depth = (m_slider1->GetValue() / 100.f) * 255;
+	float blur = 1.f - m_slider2->GetValue() / 100.f;
 
-	for (int j = 0; j < h; j++)
+	for (int j = 0; j < hight; j++)
 	{
-		for (int i = 0; i < w; i++) {
+		for (int i = 0; i < width; i++) {
+			int d = abs(depth - map_ptr[j*width * 3 + i * 3 ]);
 			for (int k = 0; k < 3; k++) {
 
-				int c = x * 255;
-				int d = abs(c - map_ptr[j*w * 3 + i * 3 + k]);
-				int f = (blurs_map.size() - y * (blurs_map.size() - 1)) - 1;
+				int f = (blur_maps.size() - blur * (blur_maps.size() - 1)) - 1;
 				if (f < 0) f = 0;
 				int s = d / 255.f * f;
-				cpy_ptr[j*w * 3 + i * 3 + k] = blurs_map[s].GetData()[j*w * 3 + i * 3 + k];
+				cpy_ptr[j*width * 3 + i * 3 + k] = blur_maps[s].GetData()[j*width * 3 + i * 3 + k];
 			}
 		}
 	}
@@ -84,13 +87,13 @@ void GUIMyFrame::Blur_IMG() {
 }
 
 void GUIMyFrame::Blur_Frames() {
-	for (int i = 0; i < 10; i++) {
-		blurs_map.push_back(edited_image.Copy().Blur(i));
+	for (int i = 0; i < 20; i++) {
+		blur_maps.push_back(edited_image.Blur(i));
 	}
 }
 
 void GUIMyFrame::m_s_blur(wxScrollEvent& event) {
-	Blur_IMG();
+	if ( image.IsOk() && map.IsOk() ) Blur_IMG();
 	repaint();
 }
 

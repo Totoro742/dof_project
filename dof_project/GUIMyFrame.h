@@ -25,7 +25,7 @@
 
 class GUIMyFrame : public MyFrame {
 protected:
-	std::vector<wxImage> blurs_map;
+	std::vector<wxImage> blur_maps;
 
 
 public:
@@ -42,6 +42,8 @@ public:
 	void m_s_blur(wxScrollEvent& event);
 	//void preview_mode(wxCommandEvent& event);
 
+
+	
 	void Blur_IMG();
 	void Blur_Frames();
 
