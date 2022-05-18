@@ -78,8 +78,8 @@ void GUIMyFrame::Blur_IMG() {
 
 				int f = (blur_maps.size() - blur * (blur_maps.size() - 1)) - 1;
 				if (f < 0) f = 0;
-				int s = d / 255.f * f;
-				cpy_ptr[j*width * 3 + i * 3 + k] = blur_maps[s].GetData()[j*width * 3 + i * 3 + k];
+				int index = d / 255.f * f;
+				cpy_ptr[j*width * 3 + i * 3 + k] = blur_maps.at(index).GetData()[j*width * 3 + i * 3 + k];
 			}
 		}
 	}
@@ -87,13 +87,15 @@ void GUIMyFrame::Blur_IMG() {
 }
 
 void GUIMyFrame::Blur_Frames() {
-	for (int i = 0; i < 20; i++) {
+	blur_maps.clear();
+	for (int i = 0; i <+ 20; i++) {
 		blur_maps.push_back(edited_image.Blur(i));
 	}
 }
 
 void GUIMyFrame::m_s_blur(wxScrollEvent& event) {
-	if ( image.IsOk() && map.IsOk() ) Blur_IMG();
+	if ( image.IsOk() && map.IsOk() && image.GetSize()==map.GetSize())
+		Blur_IMG();
 	repaint();
 }
 
