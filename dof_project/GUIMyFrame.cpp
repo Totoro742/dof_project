@@ -99,8 +99,6 @@ void GUIMyFrame::m_s_blur(wxScrollEvent& event) {
 	repaint();
 }
 
-
-
 void GUIMyFrame::MyFrameOnPaint(wxPaintEvent& event) {
 	repaint();
 }
