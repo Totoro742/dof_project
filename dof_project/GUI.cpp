@@ -203,6 +203,33 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	slider_blur->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	m_checkBox1->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( MyFrame::preview_mode ), NULL, this );
 	button_reset->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::button_resetOnButtonClick ), NULL, this );
+	slider_brightness->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_contrast->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_gamma->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
 }
 
 MyFrame::~MyFrame()
@@ -235,5 +262,32 @@ MyFrame::~MyFrame()
 	slider_blur->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	m_checkBox1->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( MyFrame::preview_mode ), NULL, this );
 	button_reset->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::button_resetOnButtonClick ), NULL, this );
+	slider_brightness->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_brightness->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::slider_brightnessOnScroll ), NULL, this );
+	slider_contrast->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_contrast->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::slider_contrastOnScroll ), NULL, this );
+	slider_gamma->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
+	slider_gamma->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::slider_gammaOnScroll ), NULL, this );
 
 }

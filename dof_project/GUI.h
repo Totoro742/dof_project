@@ -71,6 +71,9 @@ class MyFrame : public wxFrame
 		virtual void m_s_blur( wxScrollEvent& event ) { event.Skip(); }
 		virtual void preview_mode( wxCommandEvent& event ) { event.Skip(); }
 		virtual void button_resetOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void slider_brightnessOnScroll( wxScrollEvent& event ) { event.Skip(); }
+		virtual void slider_contrastOnScroll( wxScrollEvent& event ) { event.Skip(); }
+		virtual void slider_gammaOnScroll( wxScrollEvent& event ) { event.Skip(); }
 
 
 	public:
