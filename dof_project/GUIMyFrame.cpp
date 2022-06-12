@@ -45,17 +45,21 @@ void GUIMyFrame::repaint() {
 	imageDC->SetDeviceOrigin(0, 0);
 	imageDC->SetBackground(*wxBLACK_BRUSH);
 	imageDC->Clear();
-
-	wxImage tmp = edited_image;
-	if (tmp.Ok()) {
-		tmp.Rescale(m_panel1->GetSize().GetWidth(), m_panel1->GetSize().GetHeight());
-
+	wxImage tmp;
+	if (edited_image.Ok()) {
+		if (m_checkBox1->IsChecked()) {
+			tmp = image;
+			tmp.Rescale(m_panel1->GetSize().GetWidth(), m_panel1->GetSize().GetHeight());
+		}
+		else {
+			tmp = edited_image;
+			tmp.Rescale(m_panel1->GetSize().GetWidth(), m_panel1->GetSize().GetHeight());
+		}
 		imageDC->DrawBitmap(wxBitmap(tmp), wxPoint(0, 0));
 	}
 }
-
 void GUIMyFrame::preview_mode(wxCommandEvent& event) {
-
+	;
 }
 
 void GUIMyFrame::Blur_IMG() {
@@ -67,8 +71,8 @@ void GUIMyFrame::Blur_IMG() {
 	int hight = edited_image.GetSize().GetHeight();
 	int width = edited_image.GetSize().GetWidth();
 
-	int depth = (m_slider1->GetValue() / 100.f) * 255;
-	float blur = 1.f - m_slider2->GetValue() / 100.f;
+	int depth = (slider_depth->GetValue() / 100.f) * 255;
+	float blur = 1.f - slider_blur->GetValue() / 100.f;
 
 	for (int j = 0; j < hight; j++)
 	{

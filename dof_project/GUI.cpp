@@ -1,8 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Jun 17 2015)
+// C++ code generated with wxFormBuilder (version 3.10.1-0-g8feb16b3)
 // http://www.wxformbuilder.org/
 //
-// PLEASE DO "NOT" EDIT THIS FILE!
+// PLEASE DO *NOT* EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////
 
 #include "GUI.h"
@@ -12,83 +12,193 @@
 MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxSize( -1,-1 ), wxDefaultSize );
-	
-	wxBoxSizer* bSizer1;
-	bSizer1 = new wxBoxSizer( wxHORIZONTAL );
-	
-	wxBoxSizer* bSizer2;
-	bSizer2 = new wxBoxSizer( wxVERTICAL );
-	
-	bSizer2->SetMinSize( wxSize( 200,-1 ) ); 
+
+	wxBoxSizer* main_sizer;
+	main_sizer = new wxBoxSizer( wxVERTICAL );
+
+	wxBoxSizer* main_sizer2;
+	main_sizer2 = new wxBoxSizer( wxHORIZONTAL );
+
+	wxBoxSizer* menu_sizer;
+	menu_sizer = new wxBoxSizer( wxVERTICAL );
+
+	menu_sizer->SetMinSize( wxSize( 100,-1 ) );
 	picture_button = new wxButton( this, wxID_ANY, wxT("Load Picture"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer2->Add( picture_button, 0, wxALL|wxEXPAND|wxSHAPED, 5 );
-	
+	menu_sizer->Add( picture_button, 0, wxALL|wxEXPAND|wxSHAPED, 5 );
+
 	map_button = new wxButton( this, wxID_ANY, wxT("Load Map"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer2->Add( map_button, 0, wxALL|wxEXPAND|wxSHAPED, 5 );
-	
-	m_button3 = new wxButton( this, wxID_ANY, wxT("Save Picture"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer2->Add( m_button3, 0, wxALL|wxEXPAND|wxSHAPED, 5 );
-	
-	m_slider1 = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
-	bSizer2->Add( m_slider1, 0, wxALL|wxEXPAND, 5 );
-	
+	menu_sizer->Add( map_button, 0, wxALL|wxEXPAND|wxSHAPED, 5 );
+
+	save_button = new wxButton( this, wxID_ANY, wxT("Save Picture"), wxDefaultPosition, wxDefaultSize, 0 );
+	menu_sizer->Add( save_button, 0, wxALL|wxEXPAND|wxSHAPED, 5 );
+
+	wxBoxSizer* bitmaps_sizer;
+	bitmaps_sizer = new wxBoxSizer( wxHORIZONTAL );
+
+	wxBoxSizer* bSizer14;
+	bSizer14 = new wxBoxSizer( wxVERTICAL );
+
+	m_textCtrl3 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !m_textCtrl3->HasFlag( wxTE_MULTILINE ) )
+	{
+	m_textCtrl3->SetMaxLength( 2 );
+	}
+	#else
+	m_textCtrl3->SetMaxLength( 2 );
+	#endif
+	m_textCtrl3->SetMinSize( wxSize( 30,20 ) );
+
+	bSizer14->Add( m_textCtrl3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+
+	m_staticText5 = new wxStaticText( this, wxID_ANY, wxT("First bitmap"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText5->Wrap( -1 );
+	bSizer14->Add( m_staticText5, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+
+
+	bitmaps_sizer->Add( bSizer14, 1, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer15;
+	bSizer15 = new wxBoxSizer( wxVERTICAL );
+
+	m_textCtrl4 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !m_textCtrl4->HasFlag( wxTE_MULTILINE ) )
+	{
+	m_textCtrl4->SetMaxLength( 2 );
+	}
+	#else
+	m_textCtrl4->SetMaxLength( 2 );
+	#endif
+	m_textCtrl4->SetMinSize( wxSize( 30,20 ) );
+
+	bSizer15->Add( m_textCtrl4, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+
+	m_staticText6 = new wxStaticText( this, wxID_ANY, wxT("Last bitmap"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText6->Wrap( -1 );
+	bSizer15->Add( m_staticText6, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+
+
+	bitmaps_sizer->Add( bSizer15, 1, wxEXPAND, 5 );
+
+
+	menu_sizer->Add( bitmaps_sizer, 0, wxEXPAND, 5 );
+
+	slider_depth = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	menu_sizer->Add( slider_depth, 0, wxALL|wxEXPAND, 5 );
+
 	m_staticText1 = new wxStaticText( this, wxID_ANY, wxT("Depth"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText1->Wrap( -1 );
-	bSizer2->Add( m_staticText1, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxBOTTOM, 5 );
-	
-	m_slider2 = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
-	bSizer2->Add( m_slider2, 0, wxALL|wxEXPAND, 5 );
-	
+	menu_sizer->Add( m_staticText1, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
+
+	slider_blur = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	menu_sizer->Add( slider_blur, 0, wxALL|wxEXPAND, 5 );
+
 	m_staticText2 = new wxStaticText( this, wxID_ANY, wxT("Blur"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText2->Wrap( -1 );
-	bSizer2->Add( m_staticText2, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxBOTTOM, 5 );
-	
+	menu_sizer->Add( m_staticText2, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
+
 	m_checkBox1 = new wxCheckBox( this, wxID_ANY, wxT("Preview"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer2->Add( m_checkBox1, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
-	
-	
-	bSizer1->Add( bSizer2, 0, wxEXPAND, 5 );
-	
-	wxBoxSizer* bSizer3;
-	bSizer3 = new wxBoxSizer( wxVERTICAL );
-	
+	menu_sizer->Add( m_checkBox1, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
+
+	m_staticline1 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxSize( 100,-1 ), wxLI_HORIZONTAL );
+	m_staticline1->SetMinSize( wxSize( 100,-1 ) );
+
+	menu_sizer->Add( m_staticline1, 0, wxALL|wxEXPAND, 5 );
+
+	wxBoxSizer* menu_sizer2;
+	menu_sizer2 = new wxBoxSizer( wxVERTICAL );
+
+	button_reset = new wxButton( this, wxID_ANY, wxT("Reset"), wxDefaultPosition, wxDefaultSize, 0 );
+	menu_sizer2->Add( button_reset, 0, wxALL|wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer16;
+	bSizer16 = new wxBoxSizer( wxVERTICAL );
+
+	slider_brightness = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	bSizer16->Add( slider_brightness, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText7 = new wxStaticText( this, wxID_ANY, wxT("Brightness"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText7->Wrap( -1 );
+	bSizer16->Add( m_staticText7, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+
+
+	menu_sizer2->Add( bSizer16, 1, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer17;
+	bSizer17 = new wxBoxSizer( wxVERTICAL );
+
+	slider_contrast = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer17->Add( slider_contrast, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText8 = new wxStaticText( this, wxID_ANY, wxT("Contrast"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText8->Wrap( -1 );
+	bSizer17->Add( m_staticText8, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+
+
+	menu_sizer2->Add( bSizer17, 1, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer18;
+	bSizer18 = new wxBoxSizer( wxVERTICAL );
+
+	slider_gamma = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	bSizer18->Add( slider_gamma, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText81 = new wxStaticText( this, wxID_ANY, wxT("Gamma"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText81->Wrap( -1 );
+	bSizer18->Add( m_staticText81, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
+
+
+	menu_sizer2->Add( bSizer18, 1, wxEXPAND, 5 );
+
+
+	menu_sizer->Add( menu_sizer2, 0, wxEXPAND, 5 );
+
+
+	main_sizer2->Add( menu_sizer, 0, wxEXPAND, 5 );
+
+	wxBoxSizer* panel_sizer;
+	panel_sizer = new wxBoxSizer( wxVERTICAL );
+
 	m_panel1 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxSize( 800,640 ), wxTAB_TRAVERSAL );
-	bSizer3->Add( m_panel1, 1, wxEXPAND | wxALL, 5 );
-	
-	
-	bSizer1->Add( bSizer3, 1, wxALL|wxEXPAND, 5 );
-	
-	
-	this->SetSizer( bSizer1 );
+	panel_sizer->Add( m_panel1, 1, wxEXPAND | wxALL, 5 );
+
+
+	main_sizer2->Add( panel_sizer, 1, wxALL|wxEXPAND, 5 );
+
+
+	main_sizer->Add( main_sizer2, 1, wxEXPAND, 5 );
+
+
+	this->SetSizer( main_sizer );
 	this->Layout();
-	bSizer1->Fit( this );
-	
+
 	this->Centre( wxBOTH );
-	
+
 	// Connect Events
 	this->Connect( wxEVT_PAINT, wxPaintEventHandler( MyFrame::MyFrameOnPaint ) );
 	this->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_scrolledWindow ) );
 	picture_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_picture ), NULL, this );
 	map_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_map ), NULL, this );
-	m_button3->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::save_image ), NULL, this );
-	m_slider1->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	save_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::save_image ), NULL, this );
+	slider_depth->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	m_checkBox1->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( MyFrame::preview_mode ), NULL, this );
 }
 
@@ -99,25 +209,25 @@ MyFrame::~MyFrame()
 	this->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_scrolledWindow ) );
 	picture_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_picture ), NULL, this );
 	map_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_map ), NULL, this );
-	m_button3->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::save_image ), NULL, this );
-	m_slider1->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider1->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
-	m_slider2->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	save_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::save_image ), NULL, this );
+	slider_depth->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_depth->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
+	slider_blur->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	m_checkBox1->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( MyFrame::preview_mode ), NULL, this );
-	
+
 }
