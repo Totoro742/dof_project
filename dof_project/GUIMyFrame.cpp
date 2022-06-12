@@ -103,6 +103,34 @@ void GUIMyFrame::m_s_blur(wxScrollEvent& event) {
 	repaint();
 }
 
+void GUIMyFrame::Contrast(int value, unsigned char& p) {
+	value = value * 2 - 100;
+	double c = (100.0 + value) / (101.0 - value);
+	int temp = c * (p - 127) + 127;
+	if (temp < 0)
+		p = 0;
+	else if (temp > 255)
+		p = 255;
+	else
+		p = temp;
+}
+
+void GUIMyFrame::Contrast(int value, unsigned char& p) {
+	value = value * 2 - 100;
+	unsigned char temp = p + value;
+	if (temp > 255)
+		temp = 255;
+	else if (temp < 0)
+		temp = 0;
+	p = temp;
+}
+
+void GUIMyFrame::Gamma(int value, unsigned char& p) {
+
+	float gamma = value / 50.f;
+	p = 255.f*pow(p / 255.f, 1.f / gamma);
+}
+
 void GUIMyFrame::MyFrameOnPaint(wxPaintEvent& event) {
 	repaint();
 }
