@@ -103,7 +103,7 @@ void GUIMyFrame::Blur_Frames() {
 	int first = wxAtoi(first_str);
 	int last = wxAtoi(last_str);
 	for (int i = first; i <= last; i++) {
-		blur_maps.push_back(edited_image.Blur(i));
+		blur_maps.push_back(image_blured.Blur(i));
 	}
 }
 
