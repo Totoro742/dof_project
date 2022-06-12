@@ -31,11 +31,16 @@ void GUIMyFrame::load_map(wxCommandEvent& event) {
 }
 
 void GUIMyFrame::save_image(wxCommandEvent& event) {
-	wxFileDialog saveFileDialog(this, "Save file", "", "", "JPG files (*.jpg)|*.jpg", wxFD_SAVE);
-	if (saveFileDialog.ShowModal() == wxID_OK && edited_image.IsOk()) {
-		wxString path = saveFileDialog.GetPath();
-		edited_image.SaveFile(path, saveFileDialog.GetFilename());
+	wxFileDialog saveFileDialog(this, "Save file", "", "", "JPG files (*.jpg)|*.jpg", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+	if (saveFileDialog.ShowModal() == wxID_CANCEL)
+		return;
+	wxFileOutputStream outputStream(saveFileDialog.GetPath());
+	if (!outputStream.IsOk())
+	{
+		wxLogError("Cannot save current contents in file '%s'.", saveFileDialog.GetPath());
+		return;
 	}
+	edited_image.SaveFile(saveFileDialog.GetPath(), wxBITMAP_TYPE_JPEG);
 }
 
 void GUIMyFrame::repaint() {

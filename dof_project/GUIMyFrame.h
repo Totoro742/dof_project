@@ -21,6 +21,7 @@
 #include <wx/colordlg.h>
 #include <wx/dcbuffer.h>
 #include <wx/filefn.h> 
+#include <wx/wfstream.h>
 #include <vector>
 
 class GUIMyFrame : public MyFrame {
