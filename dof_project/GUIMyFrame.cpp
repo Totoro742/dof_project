@@ -63,9 +63,7 @@ void GUIMyFrame::repaint() {
 		imageDC->DrawBitmap(wxBitmap(tmp), wxPoint(0, 0));
 	}
 }
-void GUIMyFrame::preview_mode(wxCommandEvent& event) {
-	;
-}
+
 
 void GUIMyFrame::Blur_IMG() {
 	edited_image = image.Copy();
