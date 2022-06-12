@@ -44,7 +44,7 @@ void GUIMyFrame::save_image(wxCommandEvent& event) {
 	image_blured.SaveFile(saveFileDialog.GetPath(), wxBITMAP_TYPE_JPEG);
 }
 
-void GUIMyFrame::repaint() {
+void GUIMyFrame::repaint(wxImage &image_topaint) {
 	std::unique_ptr<wxClientDC> clientDCimage(new wxClientDC(m_panel1));
 	buffer = wxBitmap(m_panel1->GetSize());
 	std::unique_ptr<wxBufferedDC> imageDC(new wxBufferedDC(clientDCimage.get(), buffer));
@@ -53,14 +53,13 @@ void GUIMyFrame::repaint() {
 	imageDC->Clear();
 	wxImage tmp;
 	
-	if (image_transformed.Ok()) {
-		Transform();
+	if (image_topaint.Ok()) {
 		if (m_checkBox1->IsChecked()) {
 			tmp = image;
 			tmp.Rescale(m_panel1->GetSize().GetWidth(), m_panel1->GetSize().GetHeight());
 		}
 		else {
-			tmp = image_transformed;
+			tmp = image_topaint;
 			tmp.Rescale(m_panel1->GetSize().GetWidth(), m_panel1->GetSize().GetHeight());
 		}
 		imageDC->DrawBitmap(wxBitmap(tmp), wxPoint(0, 0));
@@ -110,7 +109,7 @@ void GUIMyFrame::Blur_Frames() {
 void GUIMyFrame::m_s_blur(wxScrollEvent& event) {
 	if ( image.IsOk() && map.IsOk() && image.GetSize()==map.GetSize())
 		Blur_IMG();
-	repaint();
+	repaint(image_blured);
 }
 
 inline unsigned char GUIMyFrame::Contrast(int value, unsigned char p) {
@@ -142,7 +141,7 @@ inline unsigned char  GUIMyFrame::Gamma(int value, unsigned char p) {
 	return 255.f*pow(p / 255.f, 1.f / gamma);
 }
 
-void GUIMyFrame::Transform() {
+void GUIMyFrame::Transform(int value, std::function<unsigned char(int,unsigned char)> transformation) {
 	if (!image_blured.IsOk() || !image.IsOk()) return;
 	image_transformed = image_blured.Copy();
 	unsigned char* origin_ptr = image.GetData();
@@ -151,16 +150,18 @@ void GUIMyFrame::Transform() {
 		/*copy_ptr[i] = Contrast(slider_contrast->GetValue(),origin_ptr[i]);
 		copy_ptr[i] = Brightnes(slider_contrast->GetValue(),origin_ptr[i]);
 		copy_ptr[i] = Gamma(slider_contrast->GetValue(),origin_ptr[i]);
-	*/}
+	*/
+		copy_ptr[i] = transformation(value, origin_ptr[i]);
+	}
 }
 
 
 
 void GUIMyFrame::MyFrameOnPaint(wxPaintEvent& event) {
-	repaint();
+	repaint(image_blured);
 }
 void GUIMyFrame::m_scrolledWindow(wxUpdateUIEvent& event) {
-	repaint();
+	repaint(image_blured);
 }
 
 void GUIMyFrame::button_resetOnButtonClick(wxCommandEvent& event){

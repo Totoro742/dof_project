@@ -23,6 +23,7 @@
 #include <wx/filefn.h> 
 #include <wx/wfstream.h>
 #include <vector>
+#include <functional>
 
 class GUIMyFrame : public MyFrame {
 protected:
@@ -35,7 +36,7 @@ public:
 	wxBitmap bitmap, buffer;
 	void load_picture(wxCommandEvent& event);
 	void load_map(wxCommandEvent& event);
-	void repaint();
+	void repaint(wxImage &image_topaint);
 	void MyFrameOnPaint(wxPaintEvent& event);
 	void m_scrolledWindow(wxUpdateUIEvent& event);
 	void save_image(wxCommandEvent& event);
@@ -48,7 +49,7 @@ public:
 	
 	void Blur_IMG();
 	void Blur_Frames();
-	void Transform();
+	void Transform(int value, std::function<unsigned char(int, unsigned char)> transformation);
 	inline unsigned char Contrast(int value, unsigned char p);
 	inline unsigned char Brightnes(int value, unsigned char p);
 	inline unsigned char Gamma(int value, unsigned char p);
