@@ -31,7 +31,7 @@ protected:
 
 public:
 	GUIMyFrame(wxWindow* parent);
-	wxImage image, map, edited_image;
+	wxImage image, map, image_blured, image_transformed;
 	wxBitmap bitmap, buffer;
 	void load_picture(wxCommandEvent& event);
 	void load_map(wxCommandEvent& event);
@@ -48,10 +48,11 @@ public:
 	
 	void Blur_IMG();
 	void Blur_Frames();
-	void Contrast(int value, unsigned char& p);
-	void Brightnes(int value, unsigned char& p);
-	void Gamma(int value, unsigned char& p);
 	void Transform();
+	inline unsigned char Contrast(int value, unsigned char p);
+	inline unsigned char Brightnes(int value, unsigned char p);
+	inline unsigned char Gamma(int value, unsigned char p);
+	
 
 
 
