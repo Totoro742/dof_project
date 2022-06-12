@@ -50,6 +50,7 @@ public:
 	void Contrast(int value, unsigned char& p);
 	void Brightnes(int value, unsigned char& p);
 	void Gamma(int value, unsigned char& p);
+	void Transform();
 
 
 

@@ -110,7 +110,7 @@ void GUIMyFrame::m_s_blur(wxScrollEvent& event) {
 
 void GUIMyFrame::Contrast(int value, unsigned char& p) {
 	value = value * 2 - 100;
-	double c = (100.0 + value) / (101.0 - value);
+	double c = (100.0 + value) / (100.1 - value);
 	int temp = c * (p - 127) + 127;
 	if (temp < 0)
 		p = 0;
@@ -120,7 +120,7 @@ void GUIMyFrame::Contrast(int value, unsigned char& p) {
 		p = temp;
 }
 
-void GUIMyFrame::Contrast(int value, unsigned char& p) {
+void GUIMyFrame::Brightnes(int value, unsigned char& p) {
 	value = value * 2 - 100;
 	unsigned char temp = p + value;
 	if (temp > 255)
@@ -129,6 +129,10 @@ void GUIMyFrame::Contrast(int value, unsigned char& p) {
 		temp = 0;
 	p = temp;
 }
+
+void GUIMyFrame::Transform() {
+}
+
 
 void GUIMyFrame::Gamma(int value, unsigned char& p) {
 
