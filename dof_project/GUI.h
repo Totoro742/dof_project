@@ -41,9 +41,9 @@ class MyFrame : public wxFrame
 		wxButton* picture_button;
 		wxButton* map_button;
 		wxButton* save_button;
-		wxTextCtrl* m_textCtrl3;
+		wxTextCtrl* text_first;
 		wxStaticText* m_staticText5;
-		wxTextCtrl* m_textCtrl4;
+		wxTextCtrl* text_last;
 		wxStaticText* m_staticText6;
 		wxSlider* slider_depth;
 		wxStaticText* m_staticText1;
@@ -66,8 +66,11 @@ class MyFrame : public wxFrame
 		virtual void load_picture( wxCommandEvent& event ) { event.Skip(); }
 		virtual void load_map( wxCommandEvent& event ) { event.Skip(); }
 		virtual void save_image( wxCommandEvent& event ) { event.Skip(); }
+		virtual void text_firstOnTextEnter( wxCommandEvent& event ) { event.Skip(); }
+		virtual void text_lastOnTextEnter( wxCommandEvent& event ) { event.Skip(); }
 		virtual void m_s_blur( wxScrollEvent& event ) { event.Skip(); }
 		virtual void preview_mode( wxCommandEvent& event ) { event.Skip(); }
+		virtual void button_resetOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:

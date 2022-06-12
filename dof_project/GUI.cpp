@@ -11,7 +11,7 @@
 
 MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxSize( -1,-1 ), wxDefaultSize );
+	this->SetSizeHints( wxSize( 981,623 ), wxDefaultSize );
 
 	wxBoxSizer* main_sizer;
 	main_sizer = new wxBoxSizer( wxVERTICAL );
@@ -38,18 +38,18 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	wxBoxSizer* bSizer14;
 	bSizer14 = new wxBoxSizer( wxVERTICAL );
 
-	m_textCtrl3 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	text_first = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
 	#ifdef __WXGTK__
-	if ( !m_textCtrl3->HasFlag( wxTE_MULTILINE ) )
+	if ( !text_first->HasFlag( wxTE_MULTILINE ) )
 	{
-	m_textCtrl3->SetMaxLength( 2 );
+	text_first->SetMaxLength( 2 );
 	}
 	#else
-	m_textCtrl3->SetMaxLength( 2 );
+	text_first->SetMaxLength( 2 );
 	#endif
-	m_textCtrl3->SetMinSize( wxSize( 30,20 ) );
+	text_first->SetMinSize( wxSize( 30,20 ) );
 
-	bSizer14->Add( m_textCtrl3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	bSizer14->Add( text_first, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	m_staticText5 = new wxStaticText( this, wxID_ANY, wxT("First bitmap"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText5->Wrap( -1 );
@@ -61,18 +61,18 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	wxBoxSizer* bSizer15;
 	bSizer15 = new wxBoxSizer( wxVERTICAL );
 
-	m_textCtrl4 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	text_last = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
 	#ifdef __WXGTK__
-	if ( !m_textCtrl4->HasFlag( wxTE_MULTILINE ) )
+	if ( !text_last->HasFlag( wxTE_MULTILINE ) )
 	{
-	m_textCtrl4->SetMaxLength( 2 );
+	text_last->SetMaxLength( 2 );
 	}
 	#else
-	m_textCtrl4->SetMaxLength( 2 );
+	text_last->SetMaxLength( 2 );
 	#endif
-	m_textCtrl4->SetMinSize( wxSize( 30,20 ) );
+	text_last->SetMinSize( wxSize( 30,20 ) );
 
-	bSizer15->Add( m_textCtrl4, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	bSizer15->Add( text_last, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	m_staticText6 = new wxStaticText( this, wxID_ANY, wxT("Last bitmap"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText6->Wrap( -1 );
@@ -181,6 +181,8 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	picture_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_picture ), NULL, this );
 	map_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_map ), NULL, this );
 	save_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::save_image ), NULL, this );
+	text_first->Connect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( MyFrame::text_firstOnTextEnter ), NULL, this );
+	text_last->Connect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( MyFrame::text_lastOnTextEnter ), NULL, this );
 	slider_depth->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	slider_depth->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	slider_depth->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
@@ -200,6 +202,7 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	slider_blur->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	slider_blur->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	m_checkBox1->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( MyFrame::preview_mode ), NULL, this );
+	button_reset->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::button_resetOnButtonClick ), NULL, this );
 }
 
 MyFrame::~MyFrame()
@@ -210,6 +213,8 @@ MyFrame::~MyFrame()
 	picture_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_picture ), NULL, this );
 	map_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_map ), NULL, this );
 	save_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::save_image ), NULL, this );
+	text_first->Disconnect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( MyFrame::text_firstOnTextEnter ), NULL, this );
+	text_last->Disconnect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( MyFrame::text_lastOnTextEnter ), NULL, this );
 	slider_depth->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	slider_depth->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	slider_depth->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
@@ -229,5 +234,6 @@ MyFrame::~MyFrame()
 	slider_blur->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	slider_blur->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	m_checkBox1->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( MyFrame::preview_mode ), NULL, this );
+	button_reset->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::button_resetOnButtonClick ), NULL, this );
 
 }
