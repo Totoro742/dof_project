@@ -66,9 +66,7 @@ void GUIMyFrame::repaint() {
 		imageDC->DrawBitmap(wxBitmap(tmp), wxPoint(0, 0));
 	}
 }
-void GUIMyFrame::preview_mode(wxCommandEvent& event) {
-	;
-}
+
 
 void GUIMyFrame::Blur_IMG() {
 	image_blured = image.Copy();
@@ -100,8 +98,12 @@ void GUIMyFrame::Blur_IMG() {
 
 void GUIMyFrame::Blur_Frames() {
 	blur_maps.clear();
-	for (int i = 0; i <+ 20; i++) {
-		blur_maps.push_back(image_blured.Blur(i));
+	wxString first_str = text_first->GetValue();
+	wxString last_str = text_last->GetValue();
+	int first = wxAtoi(first_str);
+	int last = wxAtoi(last_str);
+	for (int i = first; i <= last; i++) {
+		blur_maps.push_back(edited_image.Blur(i));
 	}
 }
 
@@ -165,4 +167,11 @@ void GUIMyFrame::button_resetOnButtonClick(wxCommandEvent& event){
 	slider_gamma->SetValue(50);
 	slider_brightness->SetValue(50);
 	slider_contrast->SetValue(50);
+}
+
+void GUIMyFrame::text_firstOnTextEnter(wxCommandEvent& event) {
+	Blur_Frames();
+}
+void GUIMyFrame::text_lastOnTextEnter(wxCommandEvent& event){
+	Blur_Frames();
 }
