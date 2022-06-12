@@ -142,3 +142,9 @@ void GUIMyFrame::MyFrameOnPaint(wxPaintEvent& event) {
 void GUIMyFrame::m_scrolledWindow(wxUpdateUIEvent& event) {
 	repaint();
 }
+
+void GUIMyFrame::button_resetOnButtonClick(wxCommandEvent& event){
+	slider_gamma->SetValue(50);
+	slider_brightness->SetValue(50);
+	slider_contrast->SetValue(50);
+}
