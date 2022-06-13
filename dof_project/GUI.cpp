@@ -115,7 +115,7 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	wxBoxSizer* bSizer16;
 	bSizer16 = new wxBoxSizer( wxVERTICAL );
 
-	slider_brightness = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	slider_brightness = new wxSlider( this, wxID_ANY, 0, -255, 255, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	bSizer16->Add( slider_brightness, 0, wxALL|wxEXPAND, 5 );
 
 	m_staticText7 = new wxStaticText( this, wxID_ANY, wxT("Brightness"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -128,7 +128,7 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	wxBoxSizer* bSizer17;
 	bSizer17 = new wxBoxSizer( wxVERTICAL );
 
-	slider_contrast = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, 0 );
+	slider_contrast = new wxSlider( this, wxID_ANY, 0, -255, 255, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer17->Add( slider_contrast, 0, wxALL|wxEXPAND, 5 );
 
 	m_staticText8 = new wxStaticText( this, wxID_ANY, wxT("Contrast"), wxDefaultPosition, wxDefaultSize, 0 );

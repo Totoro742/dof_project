@@ -44,15 +44,18 @@ public:
 	void button_resetOnButtonClick(wxCommandEvent& event);
 	void text_firstOnTextEnter(wxCommandEvent& event);
 	void text_lastOnTextEnter(wxCommandEvent& event);
+	void slider_brightnessOnScroll(wxScrollEvent& event);
+	void slider_contrastOnScroll(wxScrollEvent& event);
+	void slider_gammaOnScroll(wxScrollEvent& event);
 
 
 	
 	void Blur_IMG();
 	void Blur_Frames();
-	void Transform(int value, std::function<unsigned char(int, unsigned char)> transformation);
-	inline unsigned char Contrast(int value, unsigned char p);
-	inline unsigned char Brightnes(int value, unsigned char p);
-	inline unsigned char Gamma(int value, unsigned char p);
+	void Transform(float value,std::function<float(float, unsigned char)> transformation);
+	 //unsigned char Contrast(int value, unsigned char p);
+	 //unsigned char Brightnes(int value, unsigned char p);
+	 //unsigned char Gamma(int value, unsigned char p);
 	
 
 
