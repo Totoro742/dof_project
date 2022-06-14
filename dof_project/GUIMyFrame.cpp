@@ -1,5 +1,29 @@
 #include "GUIMyFrame.h"
 
+
+float limit(float v);
+inline float Contrast(float value, unsigned char p);
+inline float Brightnes(float value, unsigned char p);
+inline float Gamma(float value, unsigned char p);
+
+float limit(float v) {
+	if (v > 255) return 255;
+	else if (v < 0) return 0;
+	return v;
+}
+
+inline float Contrast(float value, unsigned char p) {
+	return limit(value * (p - 127) + 127);
+}
+
+inline float Brightnes(float value, unsigned char p) {
+	return limit(p + value);
+}
+
+inline float Gamma(float value, unsigned char p) {
+	return 255.f*pow(p / 255.f, 1.f / value);
+}
+
 GUIMyFrame::GUIMyFrame(wxWindow* parent) : MyFrame(parent) {
 	this->SetBackgroundColour(wxColor(128, 128, 128));
 	image.Create(m_panel1->GetSize());
@@ -44,7 +68,7 @@ void GUIMyFrame::save_image(wxCommandEvent& event) {
 	image_transformed.SaveFile(saveFileDialog.GetPath(), wxBITMAP_TYPE_JPEG);
 }
 
-void GUIMyFrame::repaint(wxImage &image_topaint) {
+void GUIMyFrame::repaint() {
 	std::unique_ptr<wxClientDC> clientDCimage(new wxClientDC(m_panel1));
 	buffer = wxBitmap(m_panel1->GetSize());
 	std::unique_ptr<wxBufferedDC> imageDC(new wxBufferedDC(clientDCimage.get(), buffer));
@@ -53,13 +77,13 @@ void GUIMyFrame::repaint(wxImage &image_topaint) {
 	imageDC->Clear();
 	wxImage tmp;
 	
-	if (image_topaint.Ok()) {
+	if (image_transformed.Ok()) {
 		if (m_checkBox1->IsChecked()) {
 			tmp = image;
 			tmp.Rescale(m_panel1->GetSize().GetWidth(), m_panel1->GetSize().GetHeight());
 		}
 		else {
-			tmp = image_topaint;
+			tmp = image_transformed;
 			tmp.Rescale(m_panel1->GetSize().GetWidth(), m_panel1->GetSize().GetHeight());
 		}
 		imageDC->DrawBitmap(wxBitmap(tmp), wxPoint(0, 0));
@@ -110,27 +134,10 @@ void GUIMyFrame::m_s_blur(wxScrollEvent& event) {
 	if ( image.IsOk() && map.IsOk() && image.GetSize()==map.GetSize())
 		Blur_IMG();
 	image_transformed = image_blured;
-	repaint(image_transformed);
+	repaint();
 }
 
 
-float limit(float v) {
-	if (v > 255) return 255;
-	else if (v < 0) return 0;
-	return v;
-}
-
- inline float Contrast(float value, unsigned char p) {
-	return limit( value * (p - 127) + 127);
-}
-
-inline float Brightnes(float value, unsigned char p) {
-	return limit( p + value);
-}
-
- inline float Gamma(float value, unsigned char p) {
-	return 255.f*pow(p / 255.f, 1.f / value);
-}
 
 
 void GUIMyFrame::Transform(float value, std::function<float(float, unsigned char)> transformation) {
@@ -146,26 +153,26 @@ void GUIMyFrame::Transform(float value, std::function<float(float, unsigned char
 
 void GUIMyFrame::slider_brightnessOnScroll(wxScrollEvent& event) {
 	Transform(slider_brightness->GetValue(), Brightnes);
-	repaint(image_transformed);
+	repaint();
 }
 void GUIMyFrame::slider_contrastOnScroll(wxScrollEvent& event) {
 	float c = (259.f / 255.f)*(255.f + slider_contrast->GetValue()) / (259.f - slider_contrast->GetValue());
 	Transform(c, Contrast);
-	repaint(image_transformed);
+	repaint();
 }
 void GUIMyFrame::slider_gammaOnScroll(wxScrollEvent& event) {
 	float gamma = (slider_gamma->GetValue() + 1e-9) / 50.f;
 	Transform(gamma, Gamma);
-	repaint(image_transformed);
+	repaint();
 }
 
 
 
 void GUIMyFrame::MyFrameOnPaint(wxPaintEvent& event) {
-	repaint(image_blured);
+	repaint();
 }
 void GUIMyFrame::m_scrolledWindow(wxUpdateUIEvent& event) {
-	repaint(image_transformed);
+	repaint();
 }
 
 void GUIMyFrame::button_resetOnButtonClick(wxCommandEvent& event){
@@ -173,7 +180,7 @@ void GUIMyFrame::button_resetOnButtonClick(wxCommandEvent& event){
 	slider_brightness->SetValue(0);
 	slider_contrast->SetValue(0);
 	image_transformed = image_blured;
-	repaint(image_transformed);
+	repaint();
 }
 
 void GUIMyFrame::text_firstOnTextEnter(wxCommandEvent& event) {
@@ -182,3 +189,5 @@ void GUIMyFrame::text_firstOnTextEnter(wxCommandEvent& event) {
 void GUIMyFrame::text_lastOnTextEnter(wxCommandEvent& event){
 	Blur_Frames();
 }
+
+

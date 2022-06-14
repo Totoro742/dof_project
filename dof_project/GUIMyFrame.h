@@ -36,7 +36,7 @@ public:
 	wxBitmap bitmap, buffer;
 	void load_picture(wxCommandEvent& event);
 	void load_map(wxCommandEvent& event);
-	void repaint(wxImage &image_topaint);
+	void repaint();
 	void MyFrameOnPaint(wxPaintEvent& event);
 	void m_scrolledWindow(wxUpdateUIEvent& event);
 	void save_image(wxCommandEvent& event);
@@ -53,12 +53,6 @@ public:
 	void Blur_IMG();
 	void Blur_Frames();
 	void Transform(float value,std::function<float(float, unsigned char)> transformation);
-	 //unsigned char Contrast(int value, unsigned char p);
-	 //unsigned char Brightnes(int value, unsigned char p);
-	 //unsigned char Gamma(int value, unsigned char p);
 	
-
-
-
 };
 #endif // __GUI_MY_FRAME_H__
