@@ -18,12 +18,12 @@
 #include <wx/font.h>
 #include <wx/colour.h>
 #include <wx/settings.h>
+#include <wx/statline.h>
 #include <wx/textctrl.h>
 #include <wx/stattext.h>
 #include <wx/sizer.h>
 #include <wx/slider.h>
 #include <wx/checkbox.h>
-#include <wx/statline.h>
 #include <wx/panel.h>
 #include <wx/frame.h>
 
@@ -41,10 +41,13 @@ class MyFrame : public wxFrame
 		wxButton* picture_button;
 		wxButton* map_button;
 		wxButton* save_button;
+		wxStaticLine* m_staticline11;
 		wxTextCtrl* text_first;
 		wxStaticText* m_staticText5;
 		wxTextCtrl* text_last;
 		wxStaticText* m_staticText6;
+		wxButton* button_apply;
+		wxStaticLine* m_staticline111;
 		wxSlider* slider_depth;
 		wxStaticText* m_staticText1;
 		wxSlider* slider_blur;
@@ -66,8 +69,7 @@ class MyFrame : public wxFrame
 		virtual void load_picture( wxCommandEvent& event ) { event.Skip(); }
 		virtual void load_map( wxCommandEvent& event ) { event.Skip(); }
 		virtual void save_image( wxCommandEvent& event ) { event.Skip(); }
-		virtual void text_firstOnTextEnter( wxCommandEvent& event ) { event.Skip(); }
-		virtual void text_lastOnTextEnter( wxCommandEvent& event ) { event.Skip(); }
+		virtual void button_applyOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void m_s_blur( wxScrollEvent& event ) { event.Skip(); }
 		virtual void preview_mode( wxCommandEvent& event ) { event.Skip(); }
 		virtual void button_resetOnButtonClick( wxCommandEvent& event ) { event.Skip(); }

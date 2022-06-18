@@ -6,7 +6,7 @@ inline float Contrast(float value, unsigned char p);
 inline float Brightnes(float value, unsigned char p);
 inline float Gamma(float value, unsigned char p);
 
-float limit(float v) {
+inline float limit(float v) {
 	if (v > 255) return 255;
 	else if (v < 0) return 0;
 	return v;
@@ -183,11 +183,9 @@ void GUIMyFrame::button_resetOnButtonClick(wxCommandEvent& event){
 	repaint();
 }
 
-void GUIMyFrame::text_firstOnTextEnter(wxCommandEvent& event) {
+void GUIMyFrame::button_applyOnButtonClick(wxCommandEvent& event){
+	if (wxAtoi(text_first->GetValue()) > wxAtoi(text_last->GetValue()))
+		text_first->ChangeValue(text_last->GetValue());
+	if (!image_blured.IsOk() || !image.IsOk()) return;
 	Blur_Frames();
 }
-void GUIMyFrame::text_lastOnTextEnter(wxCommandEvent& event){
-	Blur_Frames();
-}
-
-

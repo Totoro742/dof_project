@@ -24,13 +24,18 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 
 	menu_sizer->SetMinSize( wxSize( 100,-1 ) );
 	picture_button = new wxButton( this, wxID_ANY, wxT("Load Picture"), wxDefaultPosition, wxDefaultSize, 0 );
-	menu_sizer->Add( picture_button, 0, wxALL|wxEXPAND|wxSHAPED, 5 );
+	menu_sizer->Add( picture_button, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxSHAPED, 5 );
 
 	map_button = new wxButton( this, wxID_ANY, wxT("Load Map"), wxDefaultPosition, wxDefaultSize, 0 );
-	menu_sizer->Add( map_button, 0, wxALL|wxEXPAND|wxSHAPED, 5 );
+	menu_sizer->Add( map_button, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxSHAPED, 5 );
 
 	save_button = new wxButton( this, wxID_ANY, wxT("Save Picture"), wxDefaultPosition, wxDefaultSize, 0 );
-	menu_sizer->Add( save_button, 0, wxALL|wxEXPAND|wxSHAPED, 5 );
+	menu_sizer->Add( save_button, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxSHAPED, 5 );
+
+	m_staticline11 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxSize( 100,-1 ), wxLI_HORIZONTAL );
+	m_staticline11->SetMinSize( wxSize( 100,-1 ) );
+
+	menu_sizer->Add( m_staticline11, 0, wxEXPAND | wxALL, 5 );
 
 	wxBoxSizer* bitmaps_sizer;
 	bitmaps_sizer = new wxBoxSizer( wxHORIZONTAL );
@@ -84,6 +89,14 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 
 	menu_sizer->Add( bitmaps_sizer, 0, wxEXPAND, 5 );
 
+	button_apply = new wxButton( this, wxID_ANY, wxT("Apply"), wxDefaultPosition, wxDefaultSize, 0 );
+	menu_sizer->Add( button_apply, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+
+	m_staticline111 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxSize( 100,-1 ), wxLI_HORIZONTAL );
+	m_staticline111->SetMinSize( wxSize( 100,-1 ) );
+
+	menu_sizer->Add( m_staticline111, 0, wxEXPAND | wxALL, 5 );
+
 	slider_depth = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	menu_sizer->Add( slider_depth, 0, wxALL|wxEXPAND, 5 );
 
@@ -110,7 +123,7 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	menu_sizer2 = new wxBoxSizer( wxVERTICAL );
 
 	button_reset = new wxButton( this, wxID_ANY, wxT("Reset"), wxDefaultPosition, wxDefaultSize, 0 );
-	menu_sizer2->Add( button_reset, 0, wxALL|wxEXPAND, 5 );
+	menu_sizer2->Add( button_reset, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	wxBoxSizer* bSizer16;
 	bSizer16 = new wxBoxSizer( wxVERTICAL );
@@ -181,8 +194,7 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	picture_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_picture ), NULL, this );
 	map_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_map ), NULL, this );
 	save_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::save_image ), NULL, this );
-	text_first->Connect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( MyFrame::text_firstOnTextEnter ), NULL, this );
-	text_last->Connect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( MyFrame::text_lastOnTextEnter ), NULL, this );
+	button_apply->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::button_applyOnButtonClick ), NULL, this );
 	slider_depth->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	slider_depth->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	slider_depth->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
@@ -240,8 +252,7 @@ MyFrame::~MyFrame()
 	picture_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_picture ), NULL, this );
 	map_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_map ), NULL, this );
 	save_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::save_image ), NULL, this );
-	text_first->Disconnect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( MyFrame::text_firstOnTextEnter ), NULL, this );
-	text_last->Disconnect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( MyFrame::text_lastOnTextEnter ), NULL, this );
+	button_apply->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::button_applyOnButtonClick ), NULL, this );
 	slider_depth->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	slider_depth->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );
 	slider_depth->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MyFrame::m_s_blur ), NULL, this );

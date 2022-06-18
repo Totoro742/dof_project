@@ -42,12 +42,10 @@ public:
 	void save_image(wxCommandEvent& event);
 	void m_s_blur(wxScrollEvent& event);
 	void button_resetOnButtonClick(wxCommandEvent& event);
-	void text_firstOnTextEnter(wxCommandEvent& event);
-	void text_lastOnTextEnter(wxCommandEvent& event);
+	void button_applyOnButtonClick(wxCommandEvent& event);
 	void slider_brightnessOnScroll(wxScrollEvent& event);
 	void slider_contrastOnScroll(wxScrollEvent& event);
 	void slider_gammaOnScroll(wxScrollEvent& event);
-
 
 	
 	void Blur_IMG();
