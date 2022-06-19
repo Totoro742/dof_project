@@ -111,11 +111,12 @@ void GUIMyFrame::Blur_IMG() {
 	{
 		for (int i = 0; i < width; i++) {
 			int d = abs(depth - map_ptr[j*width * 3 + i * 3 ]);
-			for (int k = 0; k < 3; k++) {
 
-				int f = (blur_maps.size() - blur * (blur_maps.size() - 1)) - 1;
-				if (f < 0) f = 0;
-				int index = d / 255.f * f;
+			int f = (blur_maps.size() - blur * (blur_maps.size() - 1)) - 1;
+			if (f < 0) f = 0;
+			int index = d / 255.f * f;
+
+			for (int k = 0; k < 3; k++) {
 				cpy_ptr[j*width * 3 + i * 3 + k] = blur_maps.at(index).GetData()[j*width * 3 + i * 3 + k];
 			}
 		}
