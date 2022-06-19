@@ -44,10 +44,10 @@
             <property name="hidden">0</property>
             <property name="id">wxID_ANY</property>
             <property name="maximum_size"></property>
-            <property name="minimum_size">981,623</property>
+            <property name="minimum_size">1027,660</property>
             <property name="name">MyFrame</property>
             <property name="pos"></property>
-            <property name="size">981,623</property>
+            <property name="size">1027,660</property>
             <property name="style">wxDEFAULT_FRAME_STYLE</property>
             <property name="subclass"></property>
             <property name="title">Depth of field simulator</property>
@@ -57,8 +57,7 @@
             <property name="window_name"></property>
             <property name="window_style">wxTAB_TRAVERSAL</property>
             <property name="xrc_skip_sizer">1</property>
-            <event name="OnPaint">MyFrameOnPaint</event>
-            <event name="OnUpdateUI">m_scrolledWindow</event>
+            <event name="OnUpdateUI">MyFrameOnUpdateUI</event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
                 <property name="name">main_sizer</property>

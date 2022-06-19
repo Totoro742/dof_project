@@ -34,7 +34,6 @@ public:
 	void load_picture(wxCommandEvent& event);
 	void load_map(wxCommandEvent& event);
 	void repaint();
-	//void MyFrameOnPaint(wxPaintEvent& event);
 	void m_scrolledWindow(wxUpdateUIEvent& event);
 	void save_image(wxCommandEvent& event);
 	void m_s_blur(wxScrollEvent& event);

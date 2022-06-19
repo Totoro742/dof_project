@@ -123,12 +123,12 @@ void GUIMyFrame::Blur_IMG() {
 }
 
 void GUIMyFrame::Blur_Frames() {
+	image_blured = image.Copy();
 	blur_maps.clear();
 	wxString first_str = text_first->GetValue();
 	wxString last_str = text_last->GetValue();
 	int first = wxAtoi(first_str);
 	int last = wxAtoi(last_str);
-	if(blur_maps.empty())
 	for (int i = first; i <= last; i++) {
 		blur_maps.push_back(image_blured.Blur(i));
 	}
@@ -170,11 +170,6 @@ void GUIMyFrame::slider_gammaOnScroll(wxScrollEvent& event) {
 	repaint();
 }
 
-
-/*4444
-void GUIMyFrame::MyFrameOnPaint(wxPaintEvent& event) {
-	repaint();
-}*/
 void GUIMyFrame::m_scrolledWindow(wxUpdateUIEvent& event) {
 	repaint();
 }
