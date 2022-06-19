@@ -30,6 +30,7 @@ GUIMyFrame::GUIMyFrame(wxWindow* parent) : MyFrame(parent) {
 	image_transformed.Create(m_panel1->GetSize());
 	image.SetRGB(wxRect(m_panel1->GetSize()), 255, 255, 255);
 	image_transformed.SetRGB(wxRect(m_panel1->GetSize()), 255, 255, 255);
+	repaint();
 }
 
 void GUIMyFrame::load_picture(wxCommandEvent& event) {
@@ -41,6 +42,7 @@ void GUIMyFrame::load_picture(wxCommandEvent& event) {
 		image_blured = image.Copy();
 		image_transformed = image_blured.Copy();
 		Blur_Frames();
+		repaint();
 	}
 }
 
@@ -51,6 +53,7 @@ void GUIMyFrame::load_map(wxCommandEvent& event) {
 		map.AddHandler(new wxJPEGHandler);
 		map.LoadFile(path, wxBITMAP_TYPE_JPEG);
 		map = map.Blur(5);
+		repaint();
 	}
 	
 }
@@ -125,6 +128,7 @@ void GUIMyFrame::Blur_Frames() {
 	wxString last_str = text_last->GetValue();
 	int first = wxAtoi(first_str);
 	int last = wxAtoi(last_str);
+	if(blur_maps.empty())
 	for (int i = first; i <= last; i++) {
 		blur_maps.push_back(image_blured.Blur(i));
 	}
@@ -167,10 +171,10 @@ void GUIMyFrame::slider_gammaOnScroll(wxScrollEvent& event) {
 }
 
 
-
+/*4444
 void GUIMyFrame::MyFrameOnPaint(wxPaintEvent& event) {
 	repaint();
-}
+}*/
 void GUIMyFrame::m_scrolledWindow(wxUpdateUIEvent& event) {
 	repaint();
 }
@@ -188,4 +192,8 @@ void GUIMyFrame::button_applyOnButtonClick(wxCommandEvent& event){
 		text_first->ChangeValue(text_last->GetValue());
 	if (!image_blured.IsOk() || !image.IsOk()) return;
 	Blur_Frames();
+}
+
+void GUIMyFrame::preview_mode(wxCommandEvent& event) {
+	repaint();
 }

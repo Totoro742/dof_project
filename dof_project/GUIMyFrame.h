@@ -1,4 +1,3 @@
-
 #ifndef __GUI_MY_FRAME_H__
 #define __GUI_MY_FRAME_H__
 
@@ -28,16 +27,14 @@
 class GUIMyFrame : public MyFrame {
 protected:
 	std::vector<wxImage> blur_maps;
-
-
+	wxImage image, map, image_blured, image_transformed;
+	wxBitmap buffer;
 public:
 	GUIMyFrame(wxWindow* parent);
-	wxImage image, map, image_blured, image_transformed;
-	wxBitmap bitmap, buffer;
 	void load_picture(wxCommandEvent& event);
 	void load_map(wxCommandEvent& event);
 	void repaint();
-	void MyFrameOnPaint(wxPaintEvent& event);
+	//void MyFrameOnPaint(wxPaintEvent& event);
 	void m_scrolledWindow(wxUpdateUIEvent& event);
 	void save_image(wxCommandEvent& event);
 	void m_s_blur(wxScrollEvent& event);
@@ -46,7 +43,7 @@ public:
 	void slider_brightnessOnScroll(wxScrollEvent& event);
 	void slider_contrastOnScroll(wxScrollEvent& event);
 	void slider_gammaOnScroll(wxScrollEvent& event);
-
+	void preview_mode(wxCommandEvent& event);
 	
 	void Blur_IMG();
 	void Blur_Frames();

@@ -11,7 +11,7 @@
 
 MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxSize( 981,623 ), wxDefaultSize );
+	this->SetSizeHints( wxSize( 1027,660 ), wxDefaultSize );
 
 	wxBoxSizer* main_sizer;
 	main_sizer = new wxBoxSizer( wxVERTICAL );
@@ -189,8 +189,6 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	this->Centre( wxBOTH );
 
 	// Connect Events
-	this->Connect( wxEVT_PAINT, wxPaintEventHandler( MyFrame::MyFrameOnPaint ) );
-	this->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_scrolledWindow ) );
 	picture_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_picture ), NULL, this );
 	map_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_map ), NULL, this );
 	save_button->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::save_image ), NULL, this );
@@ -247,8 +245,6 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 MyFrame::~MyFrame()
 {
 	// Disconnect Events
-	this->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MyFrame::MyFrameOnPaint ) );
-	this->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_scrolledWindow ) );
 	picture_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_picture ), NULL, this );
 	map_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::load_map ), NULL, this );
 	save_button->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame::save_image ), NULL, this );
