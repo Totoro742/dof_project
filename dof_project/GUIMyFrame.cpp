@@ -6,6 +6,8 @@ inline float Contrast(float value, unsigned char p);
 inline float Brightnes(float value, unsigned char p);
 inline float Gamma(float value, unsigned char p);
 
+
+
 inline float limit(float v) {
 	if (v > 255) return 255;
 	else if (v < 0) return 0;
@@ -21,15 +23,15 @@ inline float Brightnes(float value, unsigned char p) {
 }
 
 inline float Gamma(float value, unsigned char p) {
-	return 255.f*pow(p / 255.f, 1.f / value);
+	return 255.f*pow(p / 255.f, value);
 }
 
 GUIMyFrame::GUIMyFrame(wxWindow* parent) : MyFrame(parent) {
 	this->SetBackgroundColour(wxColor(128, 128, 128));
 	image.Create(m_panel1->GetSize());
-	image_transformed.Create(m_panel1->GetSize());
+	image_final.Create(m_panel1->GetSize());
 	image.SetRGB(wxRect(m_panel1->GetSize()), 255, 255, 255);
-	image_transformed.SetRGB(wxRect(m_panel1->GetSize()), 255, 255, 255);
+	image_final.SetRGB(wxRect(m_panel1->GetSize()), 255, 255, 255);
 	repaint();
 }
 
@@ -39,9 +41,9 @@ void GUIMyFrame::load_picture(wxCommandEvent& event) {
 		wxString path = loadFile.GetPath();
 		image.AddHandler(new wxJPEGHandler);
 		image.LoadFile(path, wxBITMAP_TYPE_JPEG);
-		image_blured = image.Copy();
-		image_transformed = image_blured.Copy();
 		Blur_Frames();
+		image_transformed = image.Copy();
+		image_final = image.Copy();
 		repaint();
 	}
 }
@@ -68,7 +70,7 @@ void GUIMyFrame::save_image(wxCommandEvent& event) {
 		wxLogError("Cannot save current contents in file '%s'.", saveFileDialog.GetPath());
 		return;
 	}
-	image_transformed.SaveFile(saveFileDialog.GetPath(), wxBITMAP_TYPE_JPEG);
+	image_final.SaveFile(saveFileDialog.GetPath(), wxBITMAP_TYPE_JPEG);
 }
 
 void GUIMyFrame::repaint() {
@@ -80,13 +82,13 @@ void GUIMyFrame::repaint() {
 	imageDC->Clear();
 	wxImage tmp;
 	
-	if (image_transformed.Ok()) {
+	if (image_final.Ok()) {
 		if (m_checkBox1->IsChecked()) {
 			tmp = image;
 			tmp.Rescale(m_panel1->GetSize().GetWidth(), m_panel1->GetSize().GetHeight());
 		}
 		else {
-			tmp = image_transformed;
+			tmp = image_final;
 			tmp.Rescale(m_panel1->GetSize().GetWidth(), m_panel1->GetSize().GetHeight());
 		}
 		imageDC->DrawBitmap(wxBitmap(tmp), wxPoint(0, 0));
@@ -95,7 +97,6 @@ void GUIMyFrame::repaint() {
 
 
 void GUIMyFrame::Blur_IMG() {
-	image_blured = image.Copy();
 
 	unsigned char *cpy_ptr = image_blured.GetData();
 	unsigned char *map_ptr = map.GetData();
@@ -137,36 +138,45 @@ void GUIMyFrame::Blur_Frames() {
 void GUIMyFrame::m_s_blur(wxScrollEvent& event) {
 	if ( image.IsOk() && map.IsOk() && image.GetSize()==map.GetSize())
 		Blur_IMG();
-	image_transformed = image_blured;
+	image_transformed = image_blured.Copy();
+	image_final = image_blured.Copy();
+	
 	repaint();
 }
 
 
 
 
-void GUIMyFrame::Transform(float value, std::function<float(float, unsigned char)> transformation) {
+void GUIMyFrame::Transform(float value, std::function<float(float, unsigned char)> transformation, char flag) {
+
 	if (!image_blured.IsOk() || !image.IsOk()) return;
 
-	image_transformed = image_blured.Copy();
 
-	unsigned char* copy_ptr = image_transformed.GetData();
+	if (flag != t_flag) {
+		image_transformed = image_final.Copy() ;
+		t_flag = flag;
+	}
+	
+
+	unsigned char* transform_ptr = image_transformed.GetData();
+	unsigned char* final_ptr = image_final.GetData();
 	for (int i = 0; i < 3 * image.GetSize().GetWidth() * image.GetSize().GetHeight(); i++) {
-		copy_ptr[i] = transformation(value, copy_ptr[i]);
+		final_ptr[i] = transformation(value, transform_ptr[i]);
 	}
 }
 
 void GUIMyFrame::slider_brightnessOnScroll(wxScrollEvent& event) {
-	Transform(slider_brightness->GetValue(), Brightnes);
+	Transform(slider_brightness->GetValue(), Brightnes,'b');
 	repaint();
 }
 void GUIMyFrame::slider_contrastOnScroll(wxScrollEvent& event) {
 	float c = (259.f / 255.f)*(255.f + slider_contrast->GetValue()) / (259.f - slider_contrast->GetValue());
-	Transform(c, Contrast);
+	Transform(c, Contrast,'c');
 	repaint();
 }
 void GUIMyFrame::slider_gammaOnScroll(wxScrollEvent& event) {
-	float gamma = (slider_gamma->GetValue() + 1e-9) / 50.f;
-	Transform(gamma, Gamma);
+	float gamma = slider_gamma->GetValue()  / 50.f;
+	Transform(gamma, Gamma,'g');
 	repaint();
 }
 
@@ -178,7 +188,8 @@ void GUIMyFrame::button_resetOnButtonClick(wxCommandEvent& event){
 	slider_gamma->SetValue(50);
 	slider_brightness->SetValue(0);
 	slider_contrast->SetValue(0);
-	image_transformed = image_blured;
+	image_transformed = image_blured.Copy();
+	image_final = image_transformed.Copy();
 	repaint();
 }
 

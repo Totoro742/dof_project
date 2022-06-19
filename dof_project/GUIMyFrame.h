@@ -27,8 +27,9 @@
 class GUIMyFrame : public MyFrame {
 protected:
 	std::vector<wxImage> blur_maps;
-	wxImage image, map, image_blured, image_transformed;
+	wxImage image, map, image_blured, image_transformed, image_final;
 	wxBitmap buffer;
+	char t_flag = '\0';
 public:
 	GUIMyFrame(wxWindow* parent);
 	void load_picture(wxCommandEvent& event);
@@ -46,7 +47,7 @@ public:
 	
 	void Blur_IMG();
 	void Blur_Frames();
-	void Transform(float value,std::function<float(float, unsigned char)> transformation);
+	void Transform(float value,std::function<float(float, unsigned char)> transformation,char flag);
 	
 };
 #endif // __GUI_MY_FRAME_H__
