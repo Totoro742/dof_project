@@ -35,7 +35,6 @@ public:
 	void load_picture(wxCommandEvent& event);
 	void load_map(wxCommandEvent& event);
 	void repaint();
-	void m_scrolledWindow(wxUpdateUIEvent& event);
 	void save_image(wxCommandEvent& event);
 	void m_s_blur(wxScrollEvent& event);
 	void button_resetOnButtonClick(wxCommandEvent& event);
@@ -44,7 +43,8 @@ public:
 	void slider_contrastOnScroll(wxScrollEvent& event);
 	void slider_gammaOnScroll(wxScrollEvent& event);
 	void preview_mode(wxCommandEvent& event);
-	
+	void MyFrameOnPaint(wxPaintEvent& event) { repaint(); }
+	void MyFrameOnUpdateUI(wxUpdateUIEvent& event) { repaint(); }
 	void Blur_IMG();
 	void Blur_Frames();
 	void Transform(float value,std::function<float(float, unsigned char)> transformation,char flag);

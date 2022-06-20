@@ -64,6 +64,8 @@ class MyFrame : public wxFrame
 		wxPanel* m_panel1;
 
 		// Virtual event handlers, override them in your derived class
+		virtual void MyFrameOnPaint( wxPaintEvent& event ) { event.Skip(); }
+		virtual void MyFrameOnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void load_picture( wxCommandEvent& event ) { event.Skip(); }
 		virtual void load_map( wxCommandEvent& event ) { event.Skip(); }
 		virtual void save_image( wxCommandEvent& event ) { event.Skip(); }

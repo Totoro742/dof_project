@@ -181,10 +181,6 @@ void GUIMyFrame::slider_gammaOnScroll(wxScrollEvent& event) {
 	repaint();
 }
 
-void GUIMyFrame::m_scrolledWindow(wxUpdateUIEvent& event) {
-	repaint();
-}
-
 void GUIMyFrame::button_resetOnButtonClick(wxCommandEvent& event){
 	slider_gamma->SetValue(50);
 	slider_brightness->SetValue(0);
