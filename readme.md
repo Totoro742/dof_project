@@ -1,21 +1,10 @@
----
-author:
-- Kamil Gatlik, Paweł Kwolek, Mateusz Kołodziej
-title: Symulacja głębi ostrości
----
-
 # Opis projektu
 
 Celem projektu było napisanie oprogramowania, dzięki któremu dla danego
 pliku o nieskończonej głębi ostrości posiadającego mapę głębokości
 będzie można symulować efekt skończonej głębi. Upraszczając użytkownik
 może wczytać obraz oraz odpowiadającą mu mapę głębokości, a także dobrać
-współczynnik rozmycia obrazu i dokonać korekty obrazu wyjściowego.\
-Przygotowanie konceptu programu, interfejsu graficznego oraz
-zaimplementowanie potrzebnych funkcji wykonaliśmy wspólnie. Paweł skupił
-się głównie na implementacji funkcji, Kamil na stworzeniu interfejsu
-graficznego, natomiast Mateusz na testowaniu programu oraz szukaniu
-bugów.
+współczynnik rozmycia obrazu i dokonać korekty obrazu wyjściowego.
 
 # Założenia wstępne przyjęte w realizacji projektu
 
@@ -68,9 +57,7 @@ ułatwia stworzenie czytelnego interfejsu. Projekt był realizowany w
 środowisku programistycznym Microsoft Visual Studio 2019. Został użyty
 domyślny kompilator MS Visual Studio, czyli MSVC (Microsoft C++
 compiler). Standard języka to C++14. Korzystaliśmy także z systemu
-kontroli wersji w postaci Git'a.
-[Repozytorium](https://github.com/Totoro742/dof_project) znajduję się w
-serwisie GitHub. Kompilacja odbywała się w systemie Windows 10/11
+kontroli wersji w postaci Git'a. Kompilacja odbywała się w systemie Windows 10/11
 (64bit). Został stworzony także prosty obrazek oraz mapa głębokości przy
 pomocy oprogramowania Blender.
 
@@ -90,24 +77,23 @@ bitmapy.
 
 # Opracowanie niezbędnych algorytmów
 
--   [wxImage::Blur()]{style="color: Emerald"} funkcja z biblioteki
-    wxWidgets służąca do rozmywania obrazów [
-    GUIMyFrame::Blur_Frames()]{style="color: Emerald"} korzystając z
+-   wxImage::Blur() funkcja z biblioteki
+    wxWidgets służąca do rozmywania obrazów
+    GUIMyFrame::Blur_Frames() korzystając z
     powyższej funkcji tworzy ciąg bitmap o różnym poziomie rozmycia.
-    Zapisuje je w\
-    [std::vector\<wxImage\>blur_maps]{style="color: Emerald"}
+    Zapisuje je w std::vector\<wxImage\>blur_map
 
--   [void GUIMyFrame::Blur_IMG()]{style="color: Emerald"} w zależności
+-   void GUIMyFrame::Blur_IMG() w zależności
     od podanych przez użytkownika wartości Depth (współczynnik
     \"odległości ostrej\") oraz Blur (wspołczynnik rozmycia
     maksymalnego), składa obrazy o różnym poziomie rozmycia z
-    [std::vector\<wxImage\>blur_maps]{style="color: Emerald"} w jedną
+    std::vector\<wxImage\>blur_maps w jedną
     całość
 
--   [ GUIMyFrame::Transform()]{style="color: Emerald"} dokonuje korekty
+-   GUIMyFrame::Transform() dokonuje korekty
     kontrastu, jasności lub gamma zależnie od podanych parametrów
 
--   [ limit()]{style="color: Emerald"} pilnuje żeby wartości nie
+-   limit() pilnuje żeby wartości nie
     wychodziły poza zakres unsigned char'a
 
     $$limit(x) = \left\{\begin{array}{rcl}
@@ -156,130 +142,102 @@ bitmapy.
 W programie znajdowały się dwie klasy zaimplementowane przez nas oraz
 jedna, która była wygenerwowana przez wxFormBuilder:
 
--   [MyApp]{style="color: Emerald"} to klasa która odpowiada za
+-   MyApp to klasa która odpowiada za
     inicjalizowanie programu
 
--   [MyFrame]{style="color: Emerald"} to klasa wygenerowana przez
+-   MyFrame to klasa wygenerowana przez
     program wxFormBuilder, znajdują się w niej elementy interfejsu oraz
     sizery odpowiadające za poprawne położenie elementów interfejsu
 
--   [GUIMyFrame]{style="color: Emerald"} to klasa w której znajdują się
+-   GUIMyFrame to klasa w której znajdują się
     struktury danych oraz metody obsługujące między innymi symulowanie
     głębi ostrości, wczytywanie i zapisywanie obrazów oraz zmianę
     kontrastu, jasności oraz korektę gamma.
 
 ## Opis zmiennych
 
--   [std::vector\<wxImage\>blur_maps]{style="color: Emerald"}
+-   std::vector\<wxImage\>blur_maps
     przechowuje bitmapy o różnym stopniu rozmycia
 
--   [wxImage image]{style="color: Emerald"} przechowuje oryginalny obraz
+-   wxImage image przechowuje oryginalny obraz
     wczytany do programu
 
--   [wxImage map]{style="color: Emerald"} przechowuje mapę głębi
+-   wxImage map przechowuje mapę głębi
 
--   [wxImage image_blured]{style="color: Emerald"} przechowuje obraz
+-   wxImage image_blured przechowuje obraz
     poddany operacji symulowania głębi ostrości
 
--   [wxImage image_transformed]{style="color: Emerald"} przechowuje
+-   wxImage image_transformed przechowuje
     obraz poddany korekcji gamma, zmianie kontrastu i jasności
 
--   [wxImage image_final]{style="color: Emerald"} przechowuje obraz,
+-   wxImage image_final przechowuje obraz,
     który jest wyświetlany i ostatecznie zapisywany
 
--   [wxBitmap buffer]{style="color: Emerald"} przechowuje bitmapę, która
+-   wxBitmap buffer przechowuje bitmapę, która
     jest rysowana na podglądzie
 
--   [char t_flag]{style="color: Emerald"} flaga oznaczająca jakiej
+-   char t_flag flaga oznaczająca jakiej
     transformacji ostatnio poddano obraz, ważne do wybrania przez
     program kolejności wykonania korekt
 
 ## Opis metod oraz funkcji
 
--   [limit]{style="color: Emerald"} zapewnia że wartości barw nie wyjdą
-    poza zakres unsigned char'a ([\[lmit\]](#lmit){reference-type="ref"
-    reference="lmit"})
+-   limit zapewnia że wartości barw nie wyjdą
+    poza zakres unsigned char'a
 
--   [Contrast]{style="color: Emerald"} liczy nową wartość barwy,
+-   Contrast liczy nową wartość barwy,
     wykonując korektę kontrastu
-    ([\[contrast\]](#contrast){reference-type="ref"
-    reference="contrast"})
 
--   [Brightness]{style="color: Emerald"} liczy nową wartość barwy,
+-   Brightness liczy nową wartość barwy,
     wykonując korektę jasności
-    ([\[brigtnes\]](#brigtnes){reference-type="ref"
-    reference="brigtnes"})
 
--   [Gamma]{style="color: Emerald"} liczy nową wartość barwy, wykonując
-    korektę gamma ([\[gamma\]](#gamma){reference-type="ref"
-    reference="gamma"})
+-   Gamma liczy nową wartość barwy, wykonując
+    korektę gamma
 
--   [load_picure]{style="color: Emerald"} metoda wczytująca obraz do
+-   load_picure metoda wczytująca obraz do
     programu. Jest on przechowywany w zmiennej
-    [image]{style="color: Emerald"};
+    image
 
--   [load_map]{style="color: Emerald"} metoda wczytująca mapę głębi do
+-   load_map metoda wczytująca mapę głębi do
     programmu. Jest ona przechowywana w zmiennej
-    [map]{style="color: Emerald"}.
+    map
 
--   [repaint]{style="color: Emerald"} metoda rysująca obraz po
+-   repaint metoda rysująca obraz po
     transformacji
 
--   [m_scrolledWindow]{style="color: Emerald"} metoda wywołująca
-    [repaint]{style="color: Emerald"} po zmianie wielkości okna
+-   m_scrolledWindow metoda wywołująca
+    repaint po zmianie wielkości okna
 
--   [save_image]{style="color: Emerald"} metoda zapisująca obraz
+-   save_image metoda zapisująca obraz
     wyjściowy do pliku
 
--   [m_s\_blur]{style="color: Emerald"} metoda wywołująca
-    [GUIMyFrame::Blur_IMG()]{style="color: Emerald"} podczas zmiany
+-   m_s_blur metoda wywołująca
+    GUIMyFrame::Blur_IMG()] podczas zmiany
     wartości suwaków Blur lub Depth
 
--   [button_resetOnButtonClick]{style="color: Emerald"} metoda
-    wywołująca [repaint]{style="color: Emerald"} po zmianie stanu pola
+-   button_resetOnButtonClick metoda
+    wywołująca repaint po zmianie stanu pola
     wyboru
 
--   [button_applyOnButtonClick]{style="color: Emerald"} metoda
+-   button_applyOnButtonClick metoda
     resetująca wartości suwaków jasności, kontrastu oraz korekcji gamma.
 
--   [slider_brightnessOnScroll]{style="color: Emerald"} metoda
+-   slider_brightnessOnScroll metoda
     wywoływana, gdy zmienia się wartość suwaka jasności
 
--   [slider_contrastOnScroll]{style="color: Emerald"} metoda wywoływana,
+-   slider_contrastOnScroll metoda wywoływana,
     gdy zmienia się wartość suwaka kontrastu
 
--   [slider_gammaOnScroll]{style="color: Emerald"} metoda wywoływana,
+-   slider_gammaOnScroll metoda wywoływana,
     gdy zmienia się wartość suwaka korekcji gamma
 
--   [prewiev_mode]{style="color: Emerald"} metoda wywoływana, gdy
+-   prewiev_mode metoda wywoływana, gdy
     zmienia się wartość pola wyboru odpowiadającego za podgląd
 
 # Testowanie
 
 Działanie programu było testowane manualnie, za pomocą przykładowych
-obrazów oraz odpowiednich dla nich map ostrości. Jednymi z przykładowych
-obrazów oraz map ostrości były:
-
-[Obraz wejściowy oraz mapa głębokości]{.image}
-
-[Obraz wejściowy oraz mapa głębokości]{.image}
-
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-Efektem wyjściowym dla pewnych parametrów był następujący obraz:
-
-[Wynikowy obraz]{.image}
+obrazów oraz odpowiednich dla nich map ostrości.
 
 # Wdrożenie, raport, wnioski
 
@@ -291,7 +249,7 @@ miejsce ma być wyostrzone. Można podejrzeć jak wygląda oryginalny obraz.
 Program pozwala także na korekcje gamma, zmianę jasności oraz kontrastu.
 Możliwe jest także wybranie pierwszej i ostatniej bitmapy i
 wygenerowanie dla nich ciągu bitmap, które zmieniają położenie punktu
-ostrości.\
+ostrości.
 W przyszłości należałoby poprawić funkcję rozmywającą obraz, aby lekko
 zmniejszyć rozmycie, która powoduje halo effect na krawędziach obrazu.
 Należy także poprawić szybkość działania programu, zwłaszcza dla obrazów
